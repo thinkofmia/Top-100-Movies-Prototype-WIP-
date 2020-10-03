@@ -4,7 +4,7 @@ var app = new Vue({
         //Default message to show
         message: 'Welcome to Top 100 Movies~',
         //Data Received
-        movies: {},
+        movies: [],
         api_key: "c886b1430121b5768bc22f4117e5cdc2"
     },
     methods:{
@@ -20,8 +20,9 @@ var app = new Vue({
             //For each movie found, save to list of movies
             for (movie in response.data.results){
                 //console.log(response.data.results[movie]);
-                app.movies[response.data.results[movie].title] = response.data.results[movie].popularity;
+                app.movies.push(response.data.results[movie]);
             }
+            app.message = "Data successfully fetched!";
         })
         .catch(function (error){
             //Log the error onto the page

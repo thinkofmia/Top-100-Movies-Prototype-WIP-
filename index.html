@@ -15,7 +15,7 @@
     <!--Header to recommend movies-->
     <h2>Movies to Recommend</h2>
     <ul>
-        <li v-for="(val,key) in movies">{{key}} - {{val}}</li>
+        <li v-for="movie in movies">{{movie.title}} - {{movie.popularity}}</li>
     </ul>
   </div>
 
