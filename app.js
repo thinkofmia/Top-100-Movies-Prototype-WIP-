@@ -5,10 +5,34 @@ var app = new Vue({
         message: 'Welcome to Top 100 Movies~',
         //Data Received
         movies: [],
+        //String for refresh/get data button
+        getDataButton: "Get Data",
+        //Current Movie Details
+        movieDetails: {},
         //API key that can be swapped
         api_key: "c886b1430121b5768bc22f4117e5cdc2"
     },
     methods:{
+        //Function to retrieve particular movie details
+        getDetails: function(movieID){
+            //Use Axios to fetch the data
+            axios.get('https://api.themoviedb.org/3/movie/'+movieID+'?api_key='+app.api_key+'&language=en-US')
+            //Runs the following after fetching the data
+            .then(function (response){
+                //Update app status
+                app.message= "Displaying movie details...";
+                //Show debug message of the data
+                console.log(response.data);
+                //Set movie details
+                app.movieDetails = response.data;
+            })
+            //Catch any error
+            .catch(function (error){
+            //Log the error onto the page
+            app.message = "Error occured: "+ error;
+            })
+        },
+        //Function to retrieve movies data
         callAxios: function(PageNo){
         var app = this;
         //Use Axios to fetch the data
@@ -46,6 +70,8 @@ var app = new Vue({
             app.callAxios(3);
             app.callAxios(4);
             app.callAxios(5);
+            //Set the button string to Refresh Data instead
+            app.getDataButton = "Refresh Data";
             console.log(app.movies);
         }
     },

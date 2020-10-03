@@ -10,13 +10,21 @@
 <body>
   <div id="app">
     {{ message }}
-
-    <br><button v-on:click="loadMovies">Get Data</button>
+    <!--Header to display current movie title-->
+    <h2 v-if="movieDetails.length>0">{{movieDetails.title}}</h2>
+    <!--Display movie details-->
+    <p v-if="movieDetails.length>0">
+        <ul>
+            <li v-for="(key, val) in movieDetails">{{key}} - {{val}}</li>
+        </ul>
+    </p>
+    <br>
     <!--Header to recommend movies-->
     <h2>Movies to Recommend</h2>
-    <ul>
-        <li v-for="movie in movies">{{movie.title}} - {{movie.popularity}}</li>
-    </ul>
+    <button v-on:click="loadMovies">{{getDataButton}}</button>
+    <ol>
+        <li v-for="movie in movies"><a href="#" v-on:click="getDetails(movie.id)">{{movie.title}}</a> - {{movie.popularity}}</li>
+    </ol>
   </div>
 
   <script src="app.js"></script>
