@@ -12,6 +12,11 @@
     {{ message }}
 
     <br><button v-on:click="loadMovies">Get Data</button>
+    <!--Header to recommend movies-->
+    <h2>Movies to Recommend</h2>
+    <ul>
+        <li v-for="movie in movies">{{movie.title}} - {{movie.popularity}}</li>
+    </ul>
   </div>
 
   <script src="app.js"></script>

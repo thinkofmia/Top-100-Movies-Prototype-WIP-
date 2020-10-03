@@ -2,7 +2,9 @@ var app = new Vue({
     el: '#app',
     data: {
         //Default message to show
-        message: 'Welcome to Top 100 Movies~'
+        message: 'Welcome to Top 100 Movies~',
+        //Data Received
+        movies: "None"
     },
     methods:{
         loadMovies: function(){
@@ -14,6 +16,8 @@ var app = new Vue({
                 app.message = response.data.results[0].title+": "+response.data.results[0].popularity;
                 //Display response data in console log
                 console.log(response.data.results);
+                //Save movies Data
+                app.movies = response.data.results;
             })
             .catch(function (error){
                 //Log the error onto the page
