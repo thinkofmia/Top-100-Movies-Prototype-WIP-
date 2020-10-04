@@ -121,9 +121,6 @@ var app = new Vue({
     computed:{
         runtime: function(){
             return Math.floor(app.movieDetails.runtime/60)+"h "+app.movieDetails.runtime%60+"min";
-        },
-        //score: function(){
-        //    return app.movieDetails.vote_average*10+"%";
-        //}
+        }
     }
   })
