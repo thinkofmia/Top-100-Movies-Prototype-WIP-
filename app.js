@@ -8,10 +8,11 @@ var app = new Vue({
     data: {
         //Default message to show
         message: 'Welcome to Top 100 Movies~',
+        keyword: '',
         //Data Received
         movies: [],
         //String for refresh/get data button
-        getDataButton: "Get Data",
+        getDataButton: "Get Top 100 Movies",
         //Current Movie Details
         movieDetails: {
         },
@@ -21,6 +22,34 @@ var app = new Vue({
         api_key: "c886b1430121b5768bc22f4117e5cdc2"
     },
     methods:{
+        //Function to search for movies
+        searchMovies: function(){
+            //Initialize movie data
+            app.movies = [];
+            //Check length of the keyword
+            if (app.keyword){
+                //Use Axios to fetch the data
+                axios.get('https://api.themoviedb.org/3/search/movie?api_key='+app.api_key+'&query='+app.keyword)
+                //Runs the following after fetching the data
+                .then(function (response){
+                    //Show debug message of the data
+                    console.log(response.data.results);
+                    //For each movie found, save to list of movies
+                    for (movie in response.data.results){
+                        app.movies.push(response.data.results[movie]);
+                    }
+                    //Update app message
+                    app.message = "Searched for "+app.keyword+"...";
+                })
+                //Catch any error
+                .catch(function (error){
+                    //Log the error onto the page
+                    app.message = "Error occured: "+ error;
+                })
+            }
+            
+            
+        },
         //Function to retrieve particular movie details
         getDetails: function(movieID){
             //Use Axios to fetch the data
@@ -81,8 +110,7 @@ var app = new Vue({
             app.callAxios(3);
             app.callAxios(4);
             app.callAxios(5);
-            //Set the button string to Refresh Data instead
-            app.getDataButton = "Refresh Data";
+            //Log the movie data
             console.log(app.movies);
         }
     },

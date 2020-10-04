@@ -19,7 +19,23 @@
 <body>
   <div id="app">
     <v-app-bar>
-      {{ message }} 
+      {{ message }}
+      <!--Search Bar--> 
+      <v-text-field
+        hide-details
+        prepend-icon="mdi-magnify"
+        single-line
+        v-on:keyup="searchMovies"
+        v-model="keyword"
+      ></v-text-field>
+      <v-btn
+              v-on:click="searchMovies"
+              elevation="2"
+              rounded
+              color="dark"
+            >
+            Search
+            </v-btn>
     </v-app-bar>
          
     <v-main>
