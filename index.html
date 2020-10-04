@@ -18,11 +18,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
+  <!--Vue App itself-->
   <div id="app">
-
     <!--Top bar view-->
     <v-app-bar>
-      <!--{{ message }} For debugging-->
+      <!--{{ message }} Status for debugging-->
       <!--Search Input Field--> 
       <v-text-field
         hide-details
@@ -75,7 +75,7 @@
                 color="lime"
                 :size="50"
                 :width="10"
-              >{{movieDetails.vote_average*10}}%</v-progress-circular>
+              >{{percentage}}</v-progress-circular>
               <!--Movie Run Time-->
                 {{runtime}}</p>
               <!--Languages-->
@@ -120,20 +120,10 @@
                 <li v-for="movie in movies"><a href="#" v-on:click="getDetails(movie.id)">{{movie.title}}</a> ({{movie.popularity}})</li>
             </ol>
           </v-col>
-
-          
         </v-row>
-      
-      </v-container>
-      
-      <v-container>
-         
       </v-container>
     </v-main>
-    
-    
   </div>
-
   <script src="app.js"></script>
 </body>
 </html>

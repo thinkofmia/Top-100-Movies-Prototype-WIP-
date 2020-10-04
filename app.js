@@ -9,6 +9,7 @@ var app = new Vue({
     data: {
         //Default message to show
         message: 'Welcome to Top 100 Movies~',
+        //Search keyword
         keyword: '',
         //Data Received
         movies: [],
@@ -121,8 +122,13 @@ var app = new Vue({
         }
     },
     computed:{
+        //Calculates the runtime of the movie
         runtime: function(){
             return Math.floor(app.movieDetails.runtime/60)+"h "+app.movieDetails.runtime%60+"min";
+        },
+        //Returns the percentage of the movie score
+        percentage: function(){
+            return movieDetails.vote_average*10+"%";
         }
     }
   })
