@@ -27,6 +27,7 @@ var app = new Vue({
             //Initialize movie data
             app.movies = [];
             //Check length of the keyword
+            //If keyword exists
             if (app.keyword){
                 //Use Axios to fetch the data
                 axios.get('https://api.themoviedb.org/3/search/movie?api_key='+app.api_key+'&query='+app.keyword)
@@ -47,7 +48,10 @@ var app = new Vue({
                     app.message = "Error occured: "+ error;
                 })
             }
-            
+            //Else if keyword is empty, erase data
+            else{
+                app.movieDetail = [];
+            }
             
         },
         //Function to retrieve particular movie details

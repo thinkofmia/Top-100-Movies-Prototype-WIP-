@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!--Tab Name-->
   <title>100+ Movies</title>
   <!--CSS Styles-->
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
@@ -18,9 +19,11 @@
 </head>
 <body>
   <div id="app">
+
+    <!--Top bar view-->
     <v-app-bar>
       <!--{{ message }} For debugging-->
-      <!--Search Bar--> 
+      <!--Search Input Field--> 
       <v-text-field
         hide-details
         prepend-icon="mdi-magnify"
@@ -28,56 +31,40 @@
         v-on:keyup="searchMovies"
         v-model="keyword"
       ></v-text-field>
+      <!--Search Button-->
       <v-btn
               v-on:click="searchMovies"
               elevation="2"
               rounded
               color="dark"
-            >
-            Search
-            </v-btn>
+      >Search</v-btn>
     </v-app-bar>
          
     <v-main>
       <v-container>
-        <v-row no-gutters>
+        <!--Align the contents in a row-->
+        <v-row >
+          <!--Left Column to display the movie details if any-->
           <v-col
-            cols="6" sm="4"
+            cols="5" sm="3"
           >
-            <!--Header to recommend movies-->
-            <h2>Movies to Recommend</h2>
-            <v-btn
-              v-on:click="loadMovies"
-              elevation="2"
-              rounded
-              color="dark"
-            >
-            {{getDataButton}}
-            </v-btn>
-            <ol>
-                <li v-for="movie in movies"><a href="#" v-on:click="getDetails(movie.id)">{{movie.title}}</a> ({{movie.popularity}})</li>
-            </ol>
-          </v-col>
-          <v-col
-            cols="6" sm="4"
-          >
+          <!--Card to contain the movie details-->
           <v-card
           color="red lighten-2"
           dark 
         >
-          <!--Image of the card-->
+          <!--Image of the card using the movie poster-->
           <v-img
           height="250"
           v-bind:src="'https://image.tmdb.org/t/p/w500/'+movieDetails.poster_path"
           ></v-img>
-          <v-card-title class="headline red lighten-3">
-            <!--Header to display current movie title-->
-            <h2 v-if="movieDetails">{{movieDetails.title}} {{movieDate}}</h2>
+          <!--Title of the movie and year of release-->
+          <v-card-title v-if="movieDetails" class="headline red lighten-3">
+            {{movieDetails.title}} {{movieDate}}
           </v-card-title>
-          
-          <v-card-text>    
-            <!--Display movie details-->
-            <div v-if="movieDetails">
+
+          <!--Display movie details-->
+          <v-card-text v-if="movieDetails">    
               <!--Movie Tag Line-->
               <p v-if="movieDetails.tagline"><i>{{movieDetails.tagline}}</i></p>
               
@@ -86,7 +73,7 @@
               <v-progress-circular  v-if="movieScore"
                 :value="movieScore"
                 color="lime"
-                :size="70"
+                :size="50"
                 :width="10"
               >{{movieDetails.vote_average*10}}%</v-progress-circular>
               <!--Movie Run Time-->
@@ -108,11 +95,33 @@
                 v-for="genre in movieDetails.genres"
               >
                 {{genre.name}}
-              </v-chip><br>
-            </div>
+              </v-chip>
             </v-card-text>
             </v-card>
           </v-col>
+          <v-col cols="1" sm="1"></v-col>
+          <!--Right Column to display list of movies-->
+          <v-col
+            cols="6" sm="4"
+          >
+            <!--Header to recommend movies-->
+            <h2>Movies to Recommend</h2>
+            <!--Button to load the top 100 movies from the database-->
+            <v-btn
+              v-on:click="loadMovies"
+              elevation="2"
+              rounded
+              color="dark"
+            >
+            {{getDataButton}}
+            </v-btn>
+            <!--For loop of the movies retrieved in an ordered list-->
+            <ol>
+                <li v-for="movie in movies"><a href="#" v-on:click="getDetails(movie.id)">{{movie.title}}</a> ({{movie.popularity}})</li>
+            </ol>
+          </v-col>
+
+          
         </v-row>
       
       </v-container>
