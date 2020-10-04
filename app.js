@@ -5,6 +5,7 @@ var app = new Vue({
         theme: { dark: true },
     }
     ),
+    //State
     data: {
         //Default message to show
         message: 'Welcome to Top 100 Movies~',
@@ -21,6 +22,7 @@ var app = new Vue({
         //API key that can be swapped
         api_key: "c886b1430121b5768bc22f4117e5cdc2"
     },
+    //Actions
     methods:{
         //Function to search for movies
         searchMovies: function(){
