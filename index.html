@@ -3,6 +3,8 @@
 <head>
   <title>100+ Movies</title>
   <!--CSS Styles-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
   <!--CDN for vue-->
@@ -37,7 +39,7 @@
             {{getDataButton}}
             </v-btn>
             <ol>
-                <li v-for="movie in movies"><a href="#" v-on:click="getDetails(movie.id)">{{movie.title}}</a> - {{movie.popularity}}</li>
+                <li v-for="movie in movies"><a href="#" v-on:click="getDetails(movie.id)">{{movie.title}}</a> ({{movie.popularity}})</li>
             </ol>
           </v-col>
           <v-col
@@ -60,18 +62,37 @@
           <v-card-text>    
             <!--Display movie details-->
             <div v-if="movieDetails">
+              <!--Movie Tag Line-->
               <p v-if="movieDetails.tagline"><i>{{movieDetails.tagline}}</i></p>
-              <p v-if="movieDetails.vote_average"></p>
-              <p v-if="movieDetails.runtime">{{runtime}}</p>
-              <p v-if="movieDetails.overview">Overview: {{movieDetails.overview}}</p>
-              <p v-if="movieDetails.genres">Genres:</p>
-              <ul>
-                <li v-for="genre in movieDetails.genres">{{genre.name}}</li>
-              </ul>
-              <p v-if="movieDetails.spoken_languages">Languages:</p>
-              <ul>
-                <li v-for="language in movieDetails.spoken_languages">{{language.name}}</li>
-              </ul>
+              
+              <p v-if="movieDetails.runtime">
+                <!--Movie Ratings-->
+              <v-progress-circular  v-if="movieScore"
+                :value="movieScore"
+                color="lime"
+                :size="70"
+                :width="10"
+              >{{movieDetails.vote_average*10}}%</v-progress-circular>
+              <!--Movie Run Time-->
+                {{runtime}}</p>
+              <!--Languages-->
+              <v-chip
+                v-if="movieDetails.spoken_languages"
+                class="ma-2"
+                v-for="language in movieDetails.spoken_languages"
+              >
+              {{language.name}}
+              </v-chip>
+              <!--Overview-->
+              <p v-if="movieDetails.overview">{{movieDetails.overview}}</p>
+              <!--Genres-->
+              <v-chip
+                v-if="movieDetails.genres"
+                class="ma-2"
+                v-for="genre in movieDetails.genres"
+              >
+                {{genre.name}}
+              </v-chip><br>
             </div>
             </v-card-text>
             </v-card>

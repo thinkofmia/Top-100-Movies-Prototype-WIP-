@@ -15,6 +15,7 @@ var app = new Vue({
         //Current Movie Details
         movieDetails: {
         },
+        movieScore: 0,
         movieDate: null,
         //API key that can be swapped
         api_key: "c886b1430121b5768bc22f4117e5cdc2"
@@ -31,6 +32,7 @@ var app = new Vue({
                 //Set movie details
                 app.movieDetails = response.data;
                 app.movieDate = "("+app.movieDetails.release_date.slice(0,4)+")";
+                app.movieScore = app.movieDetails.vote_average*10;
                 //Update app status
                 app.message= "Displaying movie details of id: "+app.movieDetails.id;
                 
@@ -88,8 +90,8 @@ var app = new Vue({
         runtime: function(){
             return Math.floor(app.movieDetails.runtime/60)+"h "+app.movieDetails.runtime%60+"min";
         },
-        score: function(){
-            return app.movieDetails.vote_average*10+"%";
-        }
+        //score: function(){
+        //    return app.movieDetails.vote_average*10+"%";
+        //}
     }
   })
