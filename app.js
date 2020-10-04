@@ -8,7 +8,9 @@ var app = new Vue({
         //String for refresh/get data button
         getDataButton: "Get Data",
         //Current Movie Details
-        movieDetails: {},
+        movieDetails: {
+        },
+        movieDate: null,
         //API key that can be swapped
         api_key: "c886b1430121b5768bc22f4117e5cdc2"
     },
@@ -19,12 +21,14 @@ var app = new Vue({
             axios.get('https://api.themoviedb.org/3/movie/'+movieID+'?api_key='+app.api_key+'&language=en-US')
             //Runs the following after fetching the data
             .then(function (response){
-                //Update app status
-                app.message= "Displaying movie details...";
                 //Show debug message of the data
                 console.log(response.data);
                 //Set movie details
                 app.movieDetails = response.data;
+                app.movieDate = "("+app.movieDetails.release_date.slice(0,4)+")";
+                //Update app status
+                app.message= "Displaying movie details of id: "+app.movieDetails.id;
+                
             })
             //Catch any error
             .catch(function (error){
@@ -76,6 +80,11 @@ var app = new Vue({
         }
     },
     computed:{
-
+        runtime: function(){
+            return Math.floor(app.movieDetails.runtime/60)+"h "+app.movieDetails.runtime%60+"min";
+        },
+        score: function(){
+            return app.movieDetails.vote_average*10+"%";
+        }
     }
   })
