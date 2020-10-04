@@ -1,5 +1,7 @@
 # Top 100 Movies Prototype
 
+![Top 100 Movies](/images/preview.PNG)
+
 Prototype web-app to display the latest top 100 movies from the imdb database. 
 
 Uses vue.js framework.
