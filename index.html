@@ -16,36 +16,60 @@
 </head>
 <body>
   <div id="app">
-    {{ message }} 
     <v-app-bar>
-      <!--Header to display current movie title-->
-      <h2 v-if="movieDetails">{{movieDetails.title}} {{movieDate}}</h2>
-      <!--Display movie details-->
-      <div v-if="movieDetails">
-        <p v-if="movieDetails.tagline"><i>{{movieDetails.tagline}}</i></p>
-        <img class="poster" v-if="movieDetails.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500/'+movieDetails.poster_path">
-        <p v-if="movieDetails.vote_average">{{score}}</p>
-        <p v-if="movieDetails.runtime">{{runtime}}</p>
-        <p v-if="movieDetails.overview">Overview: {{movieDetails.overview}}</p>
-        <p v-if="movieDetails.genres">Genres:</p>
-        <ul>
-          <li v-for="genre in movieDetails.genres">{{genre.name}}</li>
-        </ul>
-        <p v-if="movieDetails.spoken_languages">Languages:</p>
-        <ul>
-          <li v-for="language in movieDetails.spoken_languages">{{language.name}}</li>
-        </ul>
-      </div>
+      {{ message }} 
     </v-app-bar>
          
     <v-main>
       <v-container>
-         <!--Header to recommend movies-->
-         <h2>Movies to Recommend</h2>
-         <button v-on:click="loadMovies">{{getDataButton}}</button>
-         <ol>
-             <li v-for="movie in movies"><a href="#" v-on:click="getDetails(movie.id)">{{movie.title}}</a> - {{movie.popularity}}</li>
-         </ol>
+        <v-row no-gutters>
+          <v-col
+            cols="6"
+          >
+            <!--Header to recommend movies-->
+            <h2>Movies to Recommend</h2>
+            <button v-on:click="loadMovies">{{getDataButton}}</button>
+            <ol>
+                <li v-for="movie in movies"><a href="#" v-on:click="getDetails(movie.id)">{{movie.title}}</a> - {{movie.popularity}}</li>
+            </ol>
+          </v-col>
+          <v-col
+            cols="6"
+          >
+          <v-card
+          color="red lighten-2"
+          dark 
+        >
+          <v-card-title class="headline red lighten-3">
+            <!--Header to display current movie title-->
+            <h2 v-if="movieDetails">{{movieDetails.title}} {{movieDate}}</h2>
+          </v-card-title>
+          <v-card-text>    
+            <!--Display movie details-->
+            <div v-if="movieDetails">
+              <p v-if="movieDetails.tagline"><i>{{movieDetails.tagline}}</i></p>
+              <img class="poster" v-if="movieDetails.poster_path" v-bind:src="'https://image.tmdb.org/t/p/w500/'+movieDetails.poster_path">
+              <p v-if="movieDetails.vote_average">{{score}}</p>
+              <p v-if="movieDetails.runtime">{{runtime}}</p>
+              <p v-if="movieDetails.overview">Overview: {{movieDetails.overview}}</p>
+              <p v-if="movieDetails.genres">Genres:</p>
+              <ul>
+                <li v-for="genre in movieDetails.genres">{{genre.name}}</li>
+              </ul>
+              <p v-if="movieDetails.spoken_languages">Languages:</p>
+              <ul>
+                <li v-for="language in movieDetails.spoken_languages">{{language.name}}</li>
+              </ul>
+            </div>
+            </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      
+      </v-container>
+      
+      <v-container>
+         
       </v-container>
     </v-main>
     

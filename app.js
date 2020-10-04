@@ -1,7 +1,10 @@
 var app = new Vue({
     el: '#app',
     //Import vuetify
-    vuetify: new Vuetify(),
+    vuetify: new Vuetify({
+        theme: { dark: true },
+    }
+    ),
     data: {
         //Default message to show
         message: 'Welcome to Top 100 Movies~',
