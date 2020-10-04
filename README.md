@@ -3,3 +3,5 @@
 Prototype web-app to display the latest top 100 movies from the imdb database. 
 
 Uses vue.js framework.
+
+Link: https://fremontteng.github.io/Top-100-Movies-Prototype/
