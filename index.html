@@ -64,12 +64,12 @@
 
                 <p v-if="movieDetails.runtime">
                   <!--Movie Ratings-->
-                  <v-progress-circular  v-if="movieScore"
-                    :value="movieScore"
+                  <v-progress-circular  v-if="percentage"
+                    :value="percentage"
                     color="lime"
                     :size="50"
                     :width="10"
-                  >{{percentage}}</v-progress-circular>
+                  >{{percentage}}%</v-progress-circular>
                   <!--Movie Run Time-->
                   {{runtime}}</p>
 

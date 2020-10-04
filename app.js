@@ -17,7 +17,6 @@ var app = new Vue({
         getDataButton: "Top 100 Movies",
         //Current Movie Details
         movieDetails: {},
-        movieScore: 0,
         movieDate: null,
         //API key that can be swapped
         api_key: "c886b1430121b5768bc22f4117e5cdc2"
@@ -67,7 +66,6 @@ var app = new Vue({
                 //Set movie details
                 app.movieDetails = response.data;
                 app.movieDate = "("+app.movieDetails.release_date.slice(0,4)+")";
-                app.movieScore = app.movieDetails.vote_average*10;
                 //Update app status
                 app.message= "Displaying movie details of id: "+app.movieDetails.id;
                 
@@ -129,7 +127,7 @@ var app = new Vue({
         },
         //Returns the percentage of the movie score
         percentage: function(){
-            return app.movieDetails.vote_average*10+"%";
+            return app.movieDetails.vote_average*10;
         }
     }
   })
