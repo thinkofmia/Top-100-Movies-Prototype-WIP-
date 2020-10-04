@@ -11,13 +11,12 @@ var app = new Vue({
         message: 'Welcome to Top 100 Movies~',
         //Search keyword
         keyword: '',
-        //Data Received
+        //List of movies to be displayed
         movies: [],
         //String for refresh/get data button
         getDataButton: "Top 100 Movies",
         //Current Movie Details
-        movieDetails: {
-        },
+        movieDetails: {},
         movieScore: 0,
         movieDate: null,
         //API key that can be swapped
@@ -79,7 +78,7 @@ var app = new Vue({
             app.message = "Error occured: "+ error;
             })
         },
-        //Function to retrieve movies data
+        //Function to retrieve a specific page of the top 100 movies 
         callAxios: function(PageNo){
         var app = this;
         //Use Axios to fetch the data
