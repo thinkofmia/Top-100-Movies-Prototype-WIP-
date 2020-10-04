@@ -14,7 +14,7 @@ var app = new Vue({
         //Data Received
         movies: [],
         //String for refresh/get data button
-        getDataButton: "Get Top 100 Movies",
+        getDataButton: "Top 100 Movies",
         //Current Movie Details
         movieDetails: {
         },
@@ -101,6 +101,8 @@ var app = new Vue({
         .catch(function (error){
             //Log the error onto the page
             app.message = "Error occured: "+ error;
+            //Attempt to restart function
+            callAxios(PageNo);
         })
         },
 
