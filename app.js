@@ -128,7 +128,7 @@ var app = new Vue({
         },
         //Returns the percentage of the movie score
         percentage: function(){
-            return movieDetails.vote_average*10+"%";
+            return app.movieDetails.vote_average*10+"%";
         }
     }
   })

@@ -43,69 +43,63 @@
     <v-main>
       <v-container>
         <!--Align the contents in a row-->
-        <v-row >
+        <v-row>
           <!--Left Column to display the movie details if any-->
-          <v-col
-            cols="12" sm="6"
-          >
+          <v-col cols="12" sm="6">
           <!--Card to contain the movie details-->
-          <v-card
-          color="red lighten-2"
-          dark 
-        >
-          <!--Image of the card using the movie poster-->
-          <v-img
-          height="250"
-          v-bind:src="'https://image.tmdb.org/t/p/w500/'+movieDetails.poster_path"
-          ></v-img>
-          <!--Title of the movie and year of release-->
-          <v-card-title v-if="movieDetails" class="headline red lighten-3">
-            {{movieDetails.title}} {{movieDate}}
-          </v-card-title>
+          <v-card dark>
 
-          <!--Display movie details-->
-          <v-card-text v-if="movieDetails">    
-              <!--Movie Tag Line-->
-              <p v-if="movieDetails.tagline"><i>{{movieDetails.tagline}}</i></p>
-              
-              <p v-if="movieDetails.runtime">
-                <!--Movie Ratings-->
-              <v-progress-circular  v-if="movieScore"
-                :value="movieScore"
-                color="lime"
-                :size="50"
-                :width="10"
-              >{{percentage}}</v-progress-circular>
-              <!--Movie Run Time-->
-                {{runtime}}</p>
-              <!--Languages-->
-              <v-chip
-                v-if="movieDetails.spoken_languages"
-                class="ma-2"
-                v-for="language in movieDetails.spoken_languages"
-              >
-              {{language.name}}
-              </v-chip>
-              <!--Overview-->
-              <p v-if="movieDetails.overview">{{movieDetails.overview}}</p>
-              <!--Genres-->
-              <v-chip
-                v-if="movieDetails.genres"
-                class="ma-2"
-                v-for="genre in movieDetails.genres"
-              >
-                {{genre.name}}
-              </v-chip>
-            </v-card-text>
+            <!--Image of the card using the movie poster-->
+            <v-img height="250" v-bind:src="'https://image.tmdb.org/t/p/w500/'+movieDetails.poster_path"></v-img>
+
+            <!--Title of the movie and year of release-->
+            <v-card-title v-if="movieDetails" class="headline lighten-3">
+              {{movieDetails.title}} {{movieDate}}
+            </v-card-title>
+
+            <!--Display movie details-->
+            <v-card-text v-if="movieDetails">    
+                <!--Movie Tag Line-->
+                <p v-if="movieDetails.tagline"><i>{{movieDetails.tagline}}</i></p>
+
+                <p v-if="movieDetails.runtime">
+                  <!--Movie Ratings-->
+                  <v-progress-circular  v-if="movieScore"
+                    :value="movieScore"
+                    color="lime"
+                    :size="50"
+                    :width="10"
+                  >{{percentage}}</v-progress-circular>
+                  <!--Movie Run Time-->
+                  {{runtime}}</p>
+
+                <!--Languages-->
+                <v-chip
+                  v-if="movieDetails.spoken_languages"
+                  class="ma-2"
+                  v-for="language in movieDetails.spoken_languages"
+                >{{language.name}}</v-chip>
+
+                <!--Overview-->
+                <p v-if="movieDetails.overview">{{movieDetails.overview}}</p>
+
+                <!--Genres-->
+                <v-chip
+                  v-if="movieDetails.genres"
+                  class="ma-2"
+                  v-for="genre in movieDetails.genres"
+                >{{genre.name}}</v-chip>
+              </v-card-text>
             </v-card>
           </v-col>
+          
+          <!--Spacing between the two columns-->
           <v-col cols="1" sm="1"></v-col>
+
           <!--Right Column to display list of movies-->
-          <v-col
-            cols="6" sm="4"
-          >
+          <v-col  cols="6" sm="4">
             <!--Header to recommend movies-->
-            <h2>Movies to Recommend</h2>
+            <h2>Recommended Movies</h2>
             <!--Button to load the top 100 movies from the database-->
             <v-btn
               v-on:click="loadMovies"
